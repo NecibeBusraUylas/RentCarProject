@@ -31,11 +31,11 @@ namespace Business.Concrete
             if (brand.BrandName.Length >= 2)
             {
                 _brandDal.Add(brand);
-                Console.WriteLine("New brand added!\n");
+                Console.WriteLine("\nNew brand added!\n");
             }
             else
             {
-                Console.WriteLine("Brand could not be added.\n");
+                Console.WriteLine("\nBrand could not be added.\n");
             }
         }
 
@@ -44,18 +44,18 @@ namespace Business.Concrete
             if (brand.BrandName.Length >= 2)
             {
                 _brandDal.Update(brand);
-                Console.WriteLine("New brand updated!");
+                Console.WriteLine("\nNew brand updated!");
             }
             else
             {
-                Console.WriteLine("Brand could not be updated.\n");
+                Console.WriteLine("\nBrand could not be updated.\n");
             }
         }
 
         public void Delete(Brand brand)
         {
             _brandDal.Delete(brand);
-            Console.WriteLine("Brand deleted!\n");
+            Console.WriteLine("\nBrand deleted!\n");
         }
     }
 }

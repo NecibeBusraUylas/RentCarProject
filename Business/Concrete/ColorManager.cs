@@ -29,19 +29,19 @@ namespace Business.Concrete
         public void Add(Color color)
         {
             _colorDal.Add(color);
-            Console.WriteLine("Color added!\n");
+            Console.WriteLine("\nColor added!\n");
         }
 
         public void Update(Color color)
         {
             _colorDal.Update(color);
-            Console.WriteLine("Color updated!\n");
+            Console.WriteLine("\nColor updated!\n");
         }
 
         public void Delete(Color color)
         {
             _colorDal.Delete(color);
-            Console.WriteLine("Color deleted!\n");
+            Console.WriteLine("\nColor deleted!\n");
         }
 
     }
