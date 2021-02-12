@@ -17,12 +17,12 @@ namespace DataAccess.Concrete
         {
             _cars = new List<Car>
             {
-                new Car{Id=1,BrandId=1,ColorId=1,ModelYear=2019,DailyPrice=500,Description="Range Rover Sport"},
-                new Car{Id=2,BrandId=2,ColorId=1,ModelYear=2011,DailyPrice=170,Description="Toyota Corolla"},
-                new Car{Id=3,BrandId=2,ColorId=2,ModelYear=2015,DailyPrice=255,Description="Toyota Yaris"},
-                new Car{Id=4,BrandId=3,ColorId=2,ModelYear=2007,DailyPrice=100,Description="Ford Fiesta"},
-                new Car{Id=5,BrandId=3,ColorId=3,ModelYear=2019,DailyPrice=500,Description="Ford Focus"},
-                new Car{Id=6,BrandId=4,ColorId=3,ModelYear=2017,DailyPrice=450,Description="Mini Cooper Cabria"}
+                new Car{Id=1,BrandId=1,ColorId=1,ModelYear=2019,DailyPrice=500,CarName="Sport"},
+                new Car{Id=2,BrandId=2,ColorId=1,ModelYear=2011,DailyPrice=170,CarName="Corolla"},
+                new Car{Id=3,BrandId=2,ColorId=2,ModelYear=2015,DailyPrice=255,CarName="Yaris"},
+                new Car{Id=4,BrandId=3,ColorId=2,ModelYear=2007,DailyPrice=100,CarName="Fiesta"},
+                new Car{Id=5,BrandId=3,ColorId=3,ModelYear=2019,DailyPrice=500,CarName="Focus"},
+                new Car{Id=6,BrandId=4,ColorId=3,ModelYear=2017,DailyPrice=450,CarName="Cabria"}
             };
         }
 
@@ -44,7 +44,7 @@ namespace DataAccess.Concrete
         public void Add(Car car)
         {
             _cars.Add(car);
-            Console.WriteLine("\n" + car.Id + "  " + car.Description + " added!");
+            Console.WriteLine("\n" + car.Id + "  " + car.CarName + " added!");
         }
 
         public void Update(Car car)
@@ -54,15 +54,15 @@ namespace DataAccess.Concrete
             carToUpdate.ColorId = car.ColorId;
             carToUpdate.ModelYear = car.ModelYear;
             carToUpdate.DailyPrice = car.DailyPrice;
-            carToUpdate.Description = car.Description;
-            Console.WriteLine("\n" + car.Id + "  " + car.Description + " updated!");
+            carToUpdate.CarName = car.CarName;
+            Console.WriteLine("\n" + car.Id + "  " + car.CarName + " updated!");
         }
 
         public void Delete(Car car)
         {
             Car carToDelete = _cars.SingleOrDefault(p => p.Id == car.Id);
             _cars.Remove(carToDelete);
-            Console.WriteLine("\n" + car.Id + "  " + car.Description + " deleted!");
+            Console.WriteLine("\n" + car.Id + "  " + car.CarName + " deleted!");
         }
 
         public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
