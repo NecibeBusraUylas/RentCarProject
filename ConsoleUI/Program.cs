@@ -10,11 +10,76 @@ namespace ConsoleuI
     {
         static void Main(string[] args)
         {
-            ColorTest();
+            //ColorTest();
+            //BrandTest();
+            //CarTest();
+            UserTest();
+            CustomerTest();
+            RentalTest();
+        }
 
-            BrandTest();
+        private static void RentalTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            Rental rentalCar = new Rental
+            {
+                CarId = 4,
+                CustomerId = 1,
+                RentDate = DateTime.Now
+            };
+            Console.WriteLine(rentalManager.Add(rentalCar).Message);
+            Rental rentalCar2 = new Rental
+            {
+                CarId = 10,
+                CustomerId = 3,
+                RentDate = DateTime.Now
+            };
+            Console.WriteLine(rentalManager.Add(rentalCar2).Message);
 
-            CarTest();
+            Console.WriteLine("\n----- All rental cars in the system. -----");
+            Console.WriteLine("Car Name \t\t\t\t\t Customer Name ");
+            foreach (var rental in rentalManager.GetRentalCarDetails().Data)
+            {
+                Console.WriteLine( rental.CarName  + rental.CustomerName );
+            }
+        }
+
+        private static void CustomerTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            var result = customerManager.Add(new Customer
+            {
+                UserId = 1,
+                CompanyName = "My Company"
+            }) ;
+            Console.WriteLine(result.Message);
+
+            Console.WriteLine("\n----- All customers in the system. -----");
+            foreach (var customer in customerManager.GetAll().Data)
+            {
+                Console.WriteLine( customer.CompanyName);
+            }
+            Console.WriteLine("\n");
+        }
+
+        private static void UserTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            var result = userManager.Add(new User
+            {
+                FirstName = "Ahmet",
+                LastName = "Yılmaz",
+                Email = "ahmet@gmail.com",
+                Password = 12456
+            });
+            Console.WriteLine(result.Message);
+
+            Console.WriteLine("\n----- All users in the system. -----");
+            foreach (var user in userManager.GetAll().Data)
+            {
+                Console.WriteLine( user.FirstName +  user.LastName);
+            }
+            Console.WriteLine("\n");
         }
 
         private static void ColorTest()
