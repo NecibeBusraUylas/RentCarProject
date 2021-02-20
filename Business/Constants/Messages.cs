@@ -15,7 +15,7 @@ namespace Business.Constants
         public static string CarCouldNotUpdated = "Information about car could not be updated.Daily Price must be greater than 0.";
         public static string CarDeleted = "Car deleted!";
         public static string InvalidDailyPrice = "Car could not be added. Daily Price must be greater than 0.";
-        public static string InvalidCarName = "Car could not be added. The lenght of the car name must be greater or equal to .";
+        public static string InvalidCarName = "Car could not be added. The lenght of the car name must be greater or equal to 2.";
         
         public static string BrandAdded = "Brand added!";
         public static string BrandUpdated = "Brand updated!";

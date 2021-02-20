@@ -1,9 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspect.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -48,34 +52,22 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.DailyPrice >= min && p.DailyPrice <= max));
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
-            if(car.DailyPrice < 0 || car.CarName.Length < 2)
-            {
-                if (car.DailyPrice < 0)
-                {
-                    return new ErrorResult(Messages.InvalidDailyPrice);
-                }
-                else if (car.CarName.Length < 2)
-                {
-                    return new ErrorResult(Messages.InvalidCarName);
-                }
-            }
-                _carDal.Add(car);
-                return new SuccessResult(Messages.CarAdded + car.CarName + "\n");
+        //    ValidationTool.Validate(new CarValidator(), car);
+
+            _carDal.Add(car);
+            return new SuccessResult(Messages.CarAdded + car.CarName + "\n");
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
-            if (car.DailyPrice > 0)
-            {
-                _carDal.Update(car);
-                return new SuccessResult(Messages.CarUpdated);
-            }
-            else
-            {
-                return new ErrorResult(Messages.CarCouldNotUpdated);
-            }
+            //ValidationTool.Validate(new CarValidator(), car);
+
+            _carDal.Update(car);
+            return new SuccessResult(Messages.CarUpdated);           
         }
 
         public IResult Delete(Car car)
