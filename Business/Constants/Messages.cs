@@ -34,5 +34,11 @@ namespace Business.Constants
         public static string RentalCarDeleted = "Rental car deleted!";
         public static string RentalCarCouldNotAdded = "Rental car could not be added.";
         public static string RentalCarReturnDateError = "Rental car could not be added.";
+
+        public static string CarImageAdded = " Image of the car added!";
+        public static string CarImageUpdated = "Image of the car updated!";
+        public static string CarImageDeleted = "Image of the car deleted!";
+        public static string CarImageLimitExceeded = " Image limit exceded.Image could not be added!";
+        public static string NoCarImages = "The car does not have any images";
     }
 }
