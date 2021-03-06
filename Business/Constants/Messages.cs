@@ -21,10 +21,6 @@ namespace Business.Constants
         public static string BrandUpdated = "Brand updated!";
         public static string BrandDeleted = "Brand deleted!";
 
-        public static string UserAdded = "User added!";
-        public static string UserUpdated = "User updated!";
-        public static string UserDeleted = "User deleted!";
-
         public static string CustomerAdded = "Customer added!";
         public static string CustomerUpdated = "Customer updated!";
         public static string CustomerDeleted = "Customer deleted!";
@@ -40,5 +36,14 @@ namespace Business.Constants
         public static string CarImageDeleted = "Image of the car deleted!";
         public static string CarImageLimitExceeded = " Image limit exceded.Image could not be added!";
         public static string NoCarImages = "The car does not have any images";
+
+        public static string AuthorizationDenied = " Authorization denied!";
+        public static string UserAdded = "User added!";
+        public static string UserRegistered = " User registered";
+        public static string UserNotFound = "User could not be found ";
+        public static string UserAlreadyExists = "User already exists!";
+        public static string PasswordError = "Password error!";
+        public static string SuccessfulLogin = "Successful login!";       
+        public static string AccessTokenCreated = "Access token created!";
     }
 }

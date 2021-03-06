@@ -1,4 +1,4 @@
-﻿using Entities.Concrete;
+﻿using Core.Entities.Concrete;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -14,8 +14,6 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(u => u.LastName).NotNull();
             RuleFor(u => u.Email).NotNull();
             RuleFor(u => u.Email).EmailAddress();
-            RuleFor(u => u.Password).NotNull();
-            RuleFor(u => u.Password).GreaterThanOrEqualTo(8);
         }
     }
 }

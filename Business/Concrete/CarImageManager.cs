@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspect.Autofac.Validation;
@@ -25,23 +26,27 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
+        [SecuredOperation("admin,user")]
         public IDataResult<List<CarImage>> GetAll()
         {
             return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll());
         }
 
+        [SecuredOperation("admin,user")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IDataResult<CarImage> Get(int Id)
         {
             return new SuccessDataResult<CarImage>(_carImageDal.Get(p => p.Id == Id));
         }
 
+        [SecuredOperation("admin,user")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IDataResult<List<CarImage>> GetImagesByCarId(int Id)
         {
             return new SuccessDataResult<List<CarImage>>(CheckIfCarImageNull(Id));
         }
 
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {
@@ -65,6 +70,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(CarImageValidator))]
         public IResult Delete(CarImage carImage)
         {
