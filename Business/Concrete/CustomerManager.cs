@@ -2,6 +2,7 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspect.Autofac.Caching;
 using Core.Aspect.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -21,18 +22,21 @@ namespace Business.Concrete
             _customerDal = customerDal;
         }
 
+        [CacheAspect]
         [SecuredOperation("admin")]
         public IDataResult<List<Customer>> GetAll()
         {
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll());
         }
 
+        [CacheAspect]
         [SecuredOperation("admin")]
         public IDataResult<Customer> GetById(int Id)
         {
             return new SuccessDataResult<Customer>(_customerDal.Get(p => p.Id == Id));
         }
 
+        [CacheRemoveAspect("ICustomerService.Get")]
         [SecuredOperation("admin")]
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(Customer customer)
@@ -41,6 +45,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CustomerAdded + customer.CompanyName + "\n");
         }
 
+        [CacheRemoveAspect("ICustomerService.Get")]
         [SecuredOperation("admin")]
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult Update(Customer customer)
@@ -49,6 +54,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CustomerUpdated);
         }
 
+        [CacheRemoveAspect("ICustomerService.Get")]
         [SecuredOperation("admin")]
         [ValidationAspect(typeof(CustomerValidator))]
         public IResult Delete(Customer customer)

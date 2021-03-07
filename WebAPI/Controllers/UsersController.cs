@@ -13,7 +13,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        IUserService _userService;
+        //IUserService _userService;
 
         //public UsersController(IUserService userService)
         //{
