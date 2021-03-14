@@ -2,27 +2,33 @@
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
-using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarDal : EfEntityRepositoryBase<Car, RentCarContext>, ICarDal
+    public class EfCarDal : EfEntityRepositoryBase<Car, RentACarContext>, ICarDal
     {
-        public List<CarDetailDto> GetCarDetails()
+        public List<CarDetailsDto> GetCarDetails()
         {
-            using (RentCarContext context = new RentCarContext())
+          using (RentACarContext context=new RentACarContext())
             {
-                var result = from car in context.Cars
+                var result = from c in context.Cars
                              join b in context.Brands
-                             on car.BrandId equals b.Id
+                             on c.BrandId equals b.Id
                              join color in context.Colors
-                             on car.ColorId equals color.Id
-                             select new CarDetailDto { Id=car.Id ,BrandName=b.BrandName ,ColorName=color.ColorName ,ModelYear=car.ModelYear , DailyPrice=car.DailyPrice ,CarName=car.CarName };
+                             on c.ColorId equals color.Id
+                             select new CarDetailsDto
+                             {
+                                 Id = c.Id,
+                                 BrandName = b.BrandName,
+                                 ColorName = color.ColorName,
+                                 ModelYear = c.ModelYear,
+                                 DailyPrice = c.DailyPrice,
+                                 CarModel = c.CarName
+                             };
                 return result.ToList();
             }
         }

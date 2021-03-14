@@ -44,7 +44,6 @@ namespace Business.Concrete
 
 
         [CacheAspect]
-        [SecuredOperation("admin")]
         public IDataResult<List<RentalCarDetailDto>> GetRentalCarDetails()
         {
             return new SuccessDataResult<List<RentalCarDetailDto>>(_rentalDal.GetRentalCarDetails());

@@ -11,11 +11,11 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfRentalDal : EfEntityRepositoryBase<Rental, RentCarContext>, IRentalDal
+    public class EfRentalDal : EfEntityRepositoryBase<Rental, RentACarContext>, IRentalDal
     {
         public List<RentalCarDetailDto> GetRentalCarDetails(Expression<Func<Rental,bool>>filter=null)
         {
-            using (RentCarContext context = new RentCarContext())
+            using (RentACarContext context = new RentACarContext())
             {
                 var result = from r in filter is null ? context.Rentals :context.Rentals.Where(filter)
                              join car in context.Cars
@@ -24,13 +24,15 @@ namespace DataAccess.Concrete.EntityFramework
                              on r.CustomerId equals customer.Id
                              join u in context.Users
                              on customer.UserId equals u.Id
+                             join b in context.Brands
+                             on car.BrandId equals b.Id
                              select new RentalCarDetailDto 
-                             { 
+                             {
                                  Id = r.Id,
-                                 CarId = car.Id,
-                                 CarName = car.CarName, 
+                                 BrandName=b.BrandName,
+                                 FirstName=u.FirstName,
+                                 LastName=u.LastName,
                                  CustomerName = customer.CompanyName,
-                                 UserName = u.FirstName + " " + u.LastName,
                                  RentDate = r.RentDate, 
                                  ReturnDate = r.ReturnDate
                              };
