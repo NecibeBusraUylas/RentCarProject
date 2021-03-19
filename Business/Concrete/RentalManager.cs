@@ -28,7 +28,7 @@ namespace Business.Concrete
 
 
         [CacheAspect]
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
@@ -36,7 +36,7 @@ namespace Business.Concrete
 
 
         [CacheAspect]
-        [SecuredOperation("admin,rental.list")]
+        //[SecuredOperation("admin,rental.list")]
         public IDataResult<Rental> GetById(int Id)
         {
             return new SuccessDataResult<Rental>(_rentalDal.Get(p => p.Id == Id));
@@ -50,7 +50,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IRentalService.Get")]
-        [SecuredOperation("admin,rental.add")]
+        //[SecuredOperation("admin,rental.add")]
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
@@ -66,7 +66,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IRentalService.Get")]
-        [SecuredOperation("admin,rental.update")]
+        //[SecuredOperation("admin,rental.update")]
         [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(Rental rental)
         {
@@ -75,7 +75,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IRentalService.Get")]
-        [SecuredOperation("admin,rental.delete")]
+        //[SecuredOperation("admin,rental.delete")]
         public IResult Delete(Rental rental)
         {
             _rentalDal.Delete(rental);

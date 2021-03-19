@@ -3,21 +3,24 @@ using Entities.Concrete;
 using Entities.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Business.Abstract
 {
     public interface ICarService
     {
-        IDataResult<List<Car>> GetAll();
-        IDataResult<Car> GetById(int Id);
-        IDataResult<List<Car>> GetAllByBrandId(int Id);
-        IDataResult<List<Car>> GetAllByColorId(int Id);
-        IDataResult<List<CarDetailsDto>> GetCarDetails();
-        IDataResult<List<Car>> GetByDailyPrice(int min, int max);
         IResult Add(Car car);
         IResult Update(Car car);
         IResult Delete(Car car);
-        IResult TransactionalOperation(Car car);
+        IDataResult<List<Car>> GetAll();
+        IDataResult<Car> GetById(int carId);
+        IDataResult<List<CarDetailsDto>> GetCarsByColorId(int colorId);
+        IDataResult<List<CarDetailsDto>> GetCarsByBrandId(int brandId);
+        IDataResult<List<CarDetailsDto>> GetByDailyPrice(int min, int max);
+        IDataResult<List<CarDetailsDto>> GetByModelYear(int modelYear);
+        IDataResult<List<CarDetailsDto>> GetCarDetails(Expression<Func<Car, bool>> filter = null);
+        IDataResult<List<CarDetailsDto>> GetCarsBySelect(int brandId, int colorId);
+        IDataResult<List<CarDetailsDto>> GetCarDetail(int carId);
     }
 }

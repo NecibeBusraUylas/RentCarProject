@@ -64,7 +64,7 @@ namespace Business.Concrete
             return _userDal.GetClaims(user);
         }
 
-        [CacheRemoveAspect("IUserService.Get")]
+        //[CacheRemoveAspect("IUserService.Get")]
         public void Add(User user)
         {
             _userDal.Add(user);

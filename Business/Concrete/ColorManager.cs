@@ -27,14 +27,14 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        [SecuredOperation("admin,user")]
+        //[SecuredOperation("admin,user")]
         public IDataResult<Color> GetById(int Id)
         {
             return new SuccessDataResult<Color>(_colorDal.Get(p => p.Id == Id));
         }
 
         [CacheRemoveAspect("IColorService.Get")]
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         public IResult Add(Color color)
         {
             _colorDal.Add(color);
@@ -42,7 +42,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IColorService.Get")]
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         public IResult Update(Color color)
         {
             _colorDal.Update(color);
@@ -50,7 +50,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IColorService.Get")]
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
