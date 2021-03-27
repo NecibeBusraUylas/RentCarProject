@@ -91,5 +91,46 @@ namespace Business.Concrete
             }
             return new SuccessResult(Messages.RentalCarAdded);
         }
+
+        public IDataResult<List<RentalCarDetailDto>> GetByCarId(int Id)
+        {
+            return new SuccessDataResult<List<RentalCarDetailDto>>(_rentalDal.GetRentalCarDetails(c => c.Id == Id));
+        }
+
+        public IDataResult<List<RentalCarDetailDto>> GetByCustomerId(int Id)
+        {
+            return new SuccessDataResult<List<RentalCarDetailDto>>(_rentalDal.GetRentalCarDetails(c => c.CustomerId == Id));
+        }
+
+        public IDataResult<List<RentalCarDetailDto>> GetByRentDate(DateTime rentDate)
+        {
+            return new SuccessDataResult<List<RentalCarDetailDto>>(_rentalDal.GetRentalCarDetails(c => c.RentDate == rentDate));
+        }
+
+        public IDataResult<List<RentalCarDetailDto>> GetByReturnDate(DateTime returnDate)
+        {
+            return new SuccessDataResult<List<RentalCarDetailDto>>(_rentalDal.GetRentalCarDetails(c => c.ReturnDate == returnDate));
+        }
+
+        public IResult IsRentable(Rental rental)
+        {
+            var dates = _rentalDal.GetAll(r => r.CarId == rental.CarId);
+            foreach (var date in dates)
+            {
+                if (date.RentDate <= rental.RentDate && rental.RentDate <= date.ReturnDate)
+                {
+                    return new ErrorResult();
+                }
+                else if (date.RentDate <= rental.ReturnDate && rental.ReturnDate <= date.ReturnDate)
+                {
+                    return new ErrorResult();
+                }
+                else if (date.RentDate >= rental.RentDate && rental.ReturnDate >= date.ReturnDate)
+                {
+                    return new ErrorResult();
+                }
+            }
+            return new SuccessResult();
+        }
     }
 }

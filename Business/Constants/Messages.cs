@@ -45,5 +45,10 @@ namespace Business.Constants
         public static string PasswordError = "Password error!";
         public static string SuccessfulLogin = "Successful login!";       
         public static string AccessTokenCreated = "Access token created!";
+
+        public static string CardAdded = "Card added!";
+        public static string CardUpdated = "Card updated!";
+        public static string CardDeleted = "Card deleted!";
+        public static string NoCard = "The car does not find in the system.";
     }
 }

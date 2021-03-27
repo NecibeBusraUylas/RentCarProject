@@ -55,6 +55,54 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getbycarid")]
+        public IActionResult GetByCarId(int id)
+        {
+            Thread.Sleep(1000);
+            var result = _rentalService.GetByCarId(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbycustomerid")]
+        public IActionResult GetByCustomerId(int id)
+        {
+            Thread.Sleep(1000);
+            var result = _rentalService.GetByCustomerId(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbyrentdate")]
+        public IActionResult GetByRentDate(DateTime rentDate)
+        {
+            Thread.Sleep(1000);
+            var result = _rentalService.GetByRentDate(rentDate);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getbyreturndate")]
+        public IActionResult GetByReturntDate(DateTime returnDate)
+        {
+            Thread.Sleep(1000);
+            var result = _rentalService.GetByReturnDate(returnDate);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
         [HttpPost("add")]
         public IActionResult Add(Rental rental)
         {
@@ -88,15 +136,15 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("checkreturndate")]
-        public IActionResult CheckReturnDate(int carId)
+        [HttpPost("isrentable")]
+        public IActionResult IsRentable(Rental rental)
         {
-            var result = _rentalService.CheckReturnDate(carId);
+            var result = _rentalService.IsRentable(rental);
             if (result.Success)
             {
                 return Ok(result);
             }
-            return BadRequest(result);
+            return Ok(result);
         }
     }
 }

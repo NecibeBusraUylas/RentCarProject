@@ -52,7 +52,6 @@ namespace Business.Concrete
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
-            //Console.WriteLine("Deleted Successfully");
             return new SuccessResult(Messages.CarDeleted);
         }
 
@@ -60,7 +59,6 @@ namespace Business.Concrete
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
-
         }
 
         [CacheAspect]
@@ -73,15 +71,16 @@ namespace Business.Concrete
         }
 
         [CacheAspect]
-        public IDataResult<List<CarDetailsDto>> GetCarsByBrandId(int brandId)
+        public IDataResult<List<CarDetailsDto>> GetByBrand(int brandId)
         {
             return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(b => b.BrandId == brandId));
         }
 
-        public IDataResult<List<CarDetailsDto>> GetCarsByColorId(int colorId)
+        public IDataResult<List<CarDetailsDto>> GetByColor(int colorId)
         {
             return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(co => co.ColorId == colorId));
         }
+
         public IDataResult<List<CarDetailsDto>> GetByModelYear(int modelYear)
         {
             return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(c => c.ModelYear == modelYear));
@@ -93,8 +92,8 @@ namespace Business.Concrete
         }
 
         public IDataResult<List<CarDetailsDto>> GetCarDetails(Expression<Func<Car, bool>> filter = null)
-        { 
-            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(filter));       
+        {
+            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(filter));
         }
 
         [TransactionScopeAspect]
