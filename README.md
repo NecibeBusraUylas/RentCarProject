@@ -13,9 +13,21 @@ The project consists of 5 layers: Entities, DataAccess, Business, Core and WebAP
 ## Built With
 
 C#
+
+
 ASP.NET
+
+
 .NET CORE
+
+
 SQL SERVER
+
+
 Entity Framework
+
+
 AOP(Aspect Oriented Programming)
+
+
 JWT(JSON Web Tokens)
